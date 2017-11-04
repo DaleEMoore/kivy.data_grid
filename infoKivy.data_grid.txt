@@ -1,0 +1,14 @@
+
+Overview
+Forked  https://github.com/pedrodgcouto/kivy.data_grid
+to      https://github.com/DaleEMoore/kivy.data_grid
+
+
+TODO
+Is this a good MVC base?
+Specify python2
+
+
+Logs
+Sat 4 Nov 2017 2:19 PM CST
+Created
