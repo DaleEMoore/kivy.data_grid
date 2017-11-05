@@ -6,9 +6,13 @@ to      https://github.com/DaleEMoore/kivy.data_grid
 
 TODO
 Is this a good MVC base?
-Specify python2
+    This looks GREAT!
+    What's wrong with the UPDATE button, it does nothing?
+        upt_row_btn
 
 
 Logs
 Sat 4 Nov 2017 2:19 PM CST
 Created
+
+Specify python2
