@@ -5,10 +5,11 @@ to      https://github.com/DaleEMoore/kivy.data_grid
 
 
 TODO
-Is this a good MVC base?
-    This looks GREAT!
-    What's wrong with the UPDATE button, it does nothing?
-        upt_row_btn
+Take modal_insert() and make a modal_update(data).
+
+Fix UPDATE to work.
+Point data at sqlite DB.
+Accept any sqlite table and adapt the code to work with that table.
 
 
 Logs
@@ -16,3 +17,28 @@ Sat 4 Nov 2017 2:19 PM CST
 Created
 
 Specify python2
+
+
+Sun 5 Nov 2017 8:21 AM CST
+Is this a good MVC base?
+    This looks GREAT!
+
+What's wrong with the UPDATE button, it does nothing?
+    upt_row_btn, nothing attached to it's on_press event.
+    There's another update - or is it add row that gets a screen that could be used for update...
+    Add custonm row, insert.
+    add_custom_row = Button(text="Add Custom Row", on_press=modal_insert)
+Take modal_insert() and make a modal_update(data).
+I wonder if somebody else already did it...
+    https://www.google.com/search?q=kivy.data_grid+modal_insert&oq=kivy.data_grid+modal_insert&aqs=chrome..69i57.4958j0j7&sourceid=chrome&ie=UTF-8
+
+    https://www.google.com/search?ei=3qb-WabCD8LfmwG9gZ7QAQ&q=kivy.data_grid+modal_update&oq=kivy.data_grid+modal_update&gs_l=psy-ab.3..33i160k1.66543.66947.0.67351.6.5.0.0.0.0.222.396.0j1j1.2.0....0...1.1.64.psy-ab..4.2.394....0.7G5_3gT6Rac
+
+    https://www.google.com/search?ei=px7_WYicMYybmQHn8pH4CA&q=%22modal_update%22+python&oq=%22modal_update%22+python&gs_l=psy-ab.3...17803.18789.0.19062.7.7.0.0.0.0.136.799.0j7.7.0....0...1.1.64.psy-ab..0.6.686...0i13k1j0i30k1j0i10i30k1j0i22i30k1j0i22i10i30k1j33i160k1j33i22i29i30k1.0.yeZPFWztvJM
+    https://programtalk.com/vs2/?source=python/9063/coa_tools/Blender/coa_tools/operators/modal_update.py
+
+    Where did
+    https://github.com/pedrodgcouto/kivy.data_grid/tree/0c6096960c4d535b656ab475762308d783231e29
+    come from? Did he fork it from somewhere? Nope, commits look like he built it.
+
+

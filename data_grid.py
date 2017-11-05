@@ -206,7 +206,10 @@ scroll.do_scroll_x = False
 pp = partial(grid.add_row, ['001', 'Teste', '4.00', '4.00'], body_alignment, col_size)
 add_row_btn = Button(text="Add Row", on_press=pp)
 del_row_btn = Button(text="Delete Row", on_press=partial(grid.remove_row, len(header)))
-upt_row_btn = Button(text="Update Row")
+
+# TODO; modal_update won't work as implemented... figure 'EM out!
+upt_row_btn = Button(text="Update Row", on_press=modal_update)
+#upt_row_btn = Button(text="Update Row")
 slct_all_btn = Button(text="Select All", on_press=partial(grid.select_all))
 unslct_all_btn = Button(text="Unselect All", on_press=partial(grid.unselect_all))
 
@@ -262,6 +265,60 @@ def modal_insert(self):
 	insert_btn.bind(on_release=view.dismiss)
 	
 	view.open()
+
+
+def modal_update(self, updateData):
+	# TODO; copied modal_insert to modal_update; now make modal_update work!
+	lbl1 = Label(text='ID', id="lbl")
+	lbl2 = Label(text='Nome', id="lbl")
+	lbl3 = Label(text='Preco', id="lbl")
+	lbl4 = Label(text='IVA', id="lbl")
+	txt1 = TextInput(text='000', id="txtinp")
+	txt2 = TextInput(text='Product Name', id="txtinp")
+	txt3 = TextInput(text='123.45', id="txtinp")
+	txt4 = TextInput(text='23', id="txtinp")
+
+	insertion_grid = GridLayout(cols=2)
+	insertion_grid.add_widget(lbl1)
+	insertion_grid.add_widget(txt1)
+	insertion_grid.add_widget(lbl2)
+	insertion_grid.add_widget(txt2)
+	insertion_grid.add_widget(lbl3)
+	insertion_grid.add_widget(txt3)
+	insertion_grid.add_widget(lbl4)
+	insertion_grid.add_widget(txt4)
+	# create content and assign to the view
+
+	content = Button(text='Close me!')
+
+	modal_layout = BoxLayout(orientation="vertical")
+	modal_layout.add_widget(insertion_grid)
+
+	def update_def(self):
+		input_list = []
+		for text_inputs in reversed(self.parent.children[2].children):
+			if text_inputs.id == "txtinp":
+				input_list.append(text_inputs.text)
+		print input_list
+		grid.add_row(input_list, body_alignment, col_size, self)
+
+	# print view
+	# view.dismiss
+
+
+	update_btn = Button(text="Update", on_press=update_def)
+	modal_layout.add_widget(update_btn)
+	modal_layout.add_widget(content)
+
+	view = ModalView(auto_dismiss=False)
+
+	view.add_widget(modal_layout)
+	# bind the on_press event of the button to the dismiss function
+	content.bind(on_press=view.dismiss)
+	update_btn.bind(on_release=view.dismiss)
+
+	view.open()
+
 
 add_custom_row = Button(text="Add Custom Row", on_press=modal_insert)
 
