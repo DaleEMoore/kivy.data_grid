@@ -207,9 +207,9 @@ pp = partial(grid.add_row, ['001', 'Teste', '4.00', '4.00'], body_alignment, col
 add_row_btn = Button(text="Add Row", on_press=pp)
 del_row_btn = Button(text="Delete Row", on_press=partial(grid.remove_row, len(header)))
 
-# TODO; modal_update won't work as implemented... figure 'EM out!
-upt_row_btn = Button(text="Update Row", on_press=modal_update)
-#upt_row_btn = Button(text="Update Row")
+# TODO; need to lookup the selected row and give an error if not selected and pass data if selected to update.
+ppUpdate = partial(grid.add_row, ['002', 'Testes', '4.10', '4.10'], body_alignment, col_size)
+upt_row_btn = Button(text="Update Row", on_press=ppUpdate)
 slct_all_btn = Button(text="Select All", on_press=partial(grid.select_all))
 unslct_all_btn = Button(text="Unselect All", on_press=partial(grid.unselect_all))
 
