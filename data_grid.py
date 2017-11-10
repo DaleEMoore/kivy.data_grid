@@ -258,6 +258,7 @@ def modal_update(self):
 	#def modal_update(columnHeadings, rows):
 
 	# TODO; how do I get this data from inside this function?
+	# grid object is present here.
 	columnHeadings = ['ID', 'Nome', 'Preco', 'IVA']
 	rows = {1:['000', 'Product Name 1', '123.45', '23'],
 			2:['001', 'Product Name 2', '234.56', '34'],
@@ -276,7 +277,7 @@ def modal_update(self):
 
 	# TODO; Make this variable according to the count of items in columnHeadings and rows['1']!
 	elementsCH = len(columnHeadings)
-	elementsR = len(rows[1])
+	elementsR = len(rows[1]) 					# TODO; shouldn't we iterate through the selected rows?
 	if elementsCH != elementsR:
 		# TODO; logg or msgbox this!
 		# error() inform somebody
