@@ -53,8 +53,8 @@ data = json.load(data_json)
 
 header = ['ID', 'Nome', 'Preco', 'IVA']
 col_size = [0.1, 0.5, 0.2, 0.2]
-#body_alignment = ["center", "left", "right", "right"]
 body_alignment = ["center", "center", "center", "center"]
+#body_alignment = ["center", "left", "right", "right"]
 
 products_list = []
 
@@ -80,17 +80,17 @@ class DataGrid(GridLayout):
 						if ('row_'+str(row_n)+'_col_0') == c.id:
 							if c.state == "normal":
 								c.state="down"
-							else:	
+							else:
 								c.state="normal"
 						if ('row_'+str(row_n)+'_col_1') == c.id:
 							if c.state == "normal":
 								c.state="down"
-							else:	
+							else:
 								c.state="normal"
 						if ('row_'+str(row_n)+'_col_2') == c.id:
 							if c.state == "normal":
 								c.state="down"
-							else:	
+							else:
 								c.state="normal"
 						if ('row_'+str(row_n)+'_col_3') == c.id:
 							if c.state == "normal":
@@ -105,7 +105,7 @@ class DataGrid(GridLayout):
 		##########################################################
 		n = 0
 		for item in row_data:
-			cell = CLabel(text=('[color=000000]' + item + '[/color]'), 
+			cell = CLabel(text=('[color=000000]' + item + '[/color]'),
 										background_normal="background_normal.png",
 										background_down="background_pressed.png",
 										halign=row_align[n],
@@ -113,7 +113,7 @@ class DataGrid(GridLayout):
 										on_press=partial(change_on_press),
 										on_release=partial(change_on_release),
 										text_size=(0, None),
-										size_hint_x=cols_size[n], 
+										size_hint_x=cols_size[n],
 										size_hint_y=None,
 										height=40,
 										id=("row_" + str(counter) + "_col_" + str(n)))
@@ -145,7 +145,7 @@ class DataGrid(GridLayout):
 							if c.id != "Header_Label":
 								print "Length: " + str(len(ch.children))
 								print "N_cols: " + str(n_cols + 1)
-						
+
 								self.remove_widget(c)
 								count += 1
 								break
@@ -174,7 +174,7 @@ class DataGrid(GridLayout):
 			for c in ch.children:
 				if c.id != "Header_Label":
 					print str(c.id) + '   -   ' + str(c.state) +  '   -   ' + str(c.text)
-		
+
 	def __init__(self, header_data, body_data, b_align, cols_size, **kwargs):
 		super(DataGrid, self).__init__(**kwargs)
 		self.size_hint_y=None
@@ -185,35 +185,22 @@ class DataGrid(GridLayout):
 		n = 0
 		for hcell in header_data:
 			header_str = "[b]" + str(hcell) + "[/b]"
-			self.add_widget(HeaderLabel(text=header_str, 
-																	markup=True, 
+			self.add_widget(HeaderLabel(text=header_str,
+																	markup=True,
 																	size_hint_y=None,
 																	height=40,
 																	id="Header_Label",
 																	size_hint_x=cols_size[n]))
 			n+=1
 
-
-
 grid = DataGrid(header, data, body_alignment, col_size)
 grid.rows = 10
 
-scroll = ScrollView(size_hint=(1, 1), size=(400, 500000), scroll_y=0, pos_hint={'center_x':.5, 'center_y':.5})
+scroll = ScrollView(size_hint=(1, 1), size=(400, 500000), scroll_y=0, pos_hint={'center_x': .5, 'center_y': .5})
 scroll.add_widget(grid)
 scroll.do_scroll_y = True
 scroll.do_scroll_x = False
 
-pp = partial(grid.add_row, ['001', 'Teste', '4.00', '4.00'], body_alignment, col_size)
-add_row_btn = Button(text="Add Row", on_press=pp)
-del_row_btn = Button(text="Delete Row", on_press=partial(grid.remove_row, len(header)))
-
-# TODO; need to lookup the selected row and give an error if not selected and pass data if selected to update.
-ppUpdate = partial(grid.add_row, ['002', 'Testes', '4.10', '4.10'], body_alignment, col_size)
-upt_row_btn = Button(text="Update Row", on_press=ppUpdate)
-slct_all_btn = Button(text="Select All", on_press=partial(grid.select_all))
-unslct_all_btn = Button(text="Unselect All", on_press=partial(grid.unselect_all))
-
-show_grid_log = Button(text="Show log", on_press=partial(grid.show_log))
 
 ###
 def modal_insert(self):
@@ -236,7 +223,7 @@ def modal_insert(self):
 	insertion_grid.add_widget(lbl4)
 	insertion_grid.add_widget(txt4)
 	# create content and assign to the view
-	
+
 	content = Button(text='Close me!')
 
 	modal_layout = BoxLayout(orientation="vertical")
@@ -250,10 +237,10 @@ def modal_insert(self):
 		print input_list
 		grid.add_row(input_list, body_alignment, col_size, self)
 		# print view
-		# view.dismiss		
+		# view.dismiss
 
 
-	insert_btn = Button(text="Insert", on_press=insert_def)	
+	insert_btn = Button(text="Insert", on_press=insert_def)
 	modal_layout.add_widget(insert_btn)
 	modal_layout.add_widget(content)
 
@@ -263,30 +250,69 @@ def modal_insert(self):
 	# bind the on_press event of the button to the dismiss function
 	content.bind(on_press=view.dismiss)
 	insert_btn.bind(on_release=view.dismiss)
-	
+
 	view.open()
 
 
-def modal_update(self, updateData):
+def modal_update(self):
+	#def modal_update(columnHeadings, rows):
+
+	# TODO; how do I get this data from inside this function?
+	columnHeadings = ['ID', 'Nome', 'Preco', 'IVA']
+	rows = {1:['000', 'Product Name 1', '123.45', '23'],
+			2:['001', 'Product Name 2', '234.56', '34'],
+			3:['002', 'Product Name 3', '345.67', '45']
+			}
+	#def modal_update(self, columnHeadings, rows):
+
 	# TODO; copied modal_insert to modal_update; now make modal_update work!
-	lbl1 = Label(text='ID', id="lbl")
-	lbl2 = Label(text='Nome', id="lbl")
-	lbl3 = Label(text='Preco', id="lbl")
-	lbl4 = Label(text='IVA', id="lbl")
-	txt1 = TextInput(text='000', id="txtinp")
-	txt2 = TextInput(text='Product Name', id="txtinp")
-	txt3 = TextInput(text='123.45', id="txtinp")
-	txt4 = TextInput(text='23', id="txtinp")
+	# data should contain Column headings (labels) and Data.
+	# columnHeadings = ['ID', 'Nome', 'Preco', 'IVA']
+	# rows = {1:['000', 'Product Name 1', '123.45', '23'],
+	#		  2:['001', 'Product Name 2', '234.56', '34']
+	#		  3:['002', 'Product Name 3', '345.67', '45']
+	# 			}
+	# modal_update(self, columnHeadings, rows)
+
+	# TODO; Make this variable according to the count of items in columnHeadings and rows['1']!
+	elementsCH = len(columnHeadings)
+	elementsR = len(rows[1])
+	if elementsCH != elementsR:
+		# TODO; logg or msgbox this!
+		# error() inform somebody
+		print("Something is wrong, the number of columnHeadings ({}) != the number of rows (())!".format(elementsCH, elementsR))
+		exit()
 
 	insertion_grid = GridLayout(cols=2)
+	# TODO; Apply iteration here!
+	# for elementsR:
+	#	lbl? = Label(text=columnHeadings[?], id="lbl")
+	#	txt? = TextInput(text=rows['?'][0], id="txtinp")
+	lbl1 = Label(text=columnHeadings[0], id="lbl")
+	txt1 = TextInput(text=rows[1][0], id="txtinp")
 	insertion_grid.add_widget(lbl1)
 	insertion_grid.add_widget(txt1)
+	lbl2 = Label(text=columnHeadings[1], id="lbl")
+	txt2 = TextInput(text=rows[1][1], id="txtinp")
 	insertion_grid.add_widget(lbl2)
 	insertion_grid.add_widget(txt2)
+	lbl3 = Label(text=columnHeadings[2], id="lbl")
+	txt3 = TextInput(text=rows[1][2], id="txtinp")
 	insertion_grid.add_widget(lbl3)
 	insertion_grid.add_widget(txt3)
+	lbl4 = Label(text=columnHeadings[3], id="lbl")
+	txt4 = TextInput(text=rows[1][3], id="txtinp")
 	insertion_grid.add_widget(lbl4)
 	insertion_grid.add_widget(txt4)
+	#lbl1 = Label(text='ID', id="lbl")
+	#lbl2 = Label(text='Nome', id="lbl")
+	#lbl3 = Label(text='Preco', id="lbl")
+	#lbl4 = Label(text='IVA', id="lbl")
+	#txt1 = TextInput(text='000', id="txtinp")
+	#txt2 = TextInput(text='Product Name', id="txtinp")
+	#txt3 = TextInput(text='123.45', id="txtinp")
+	#txt4 = TextInput(text='23', id="txtinp")
+
 	# create content and assign to the view
 
 	content = Button(text='Close me!')
@@ -319,6 +345,23 @@ def modal_update(self, updateData):
 
 	view.open()
 
+
+pp = partial(grid.add_row, ['001', 'Teste', '4.00', '4.00'], body_alignment, col_size)
+add_row_btn = Button(text="Add Row", on_press=pp)
+del_row_btn = Button(text="Delete Row", on_press=partial(grid.remove_row, len(header)))
+
+# TODO; need to lookup the selected row and give an error if not selected and pass data if selected to update.
+# TODO; how do I do this without self?
+upt_row_btn = Button(text="Update Row", on_press=modal_update)
+#ppUdate = partial(modal_update(columnHeadings, rows))
+#ppUdate = partial(modal_update(columnHeadings, rows))
+#upt_row_btn = Button(text="Update Row", on_press=ppUdate)
+#ppUpdate = partial(grid.add_row, ['002', 'Testes', '4.10', '4.10'], body_alignment, col_size)
+#upt_row_btn = Button(text="Update Row", on_press=ppUpdate)
+slct_all_btn = Button(text="Select All", on_press=partial(grid.select_all))
+unslct_all_btn = Button(text="Unselect All", on_press=partial(grid.unselect_all))
+
+show_grid_log = Button(text="Show log", on_press=partial(grid.show_log))
 
 add_custom_row = Button(text="Add Custom Row", on_press=modal_insert)
 
