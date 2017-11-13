@@ -5,6 +5,12 @@ to      https://github.com/DaleEMoore/kivy.data_grid
 
 
 TODO
+I couldn't get kivy running on PC JenOvo.
+    It looked like cython, kivy versions.
+    I've got it working by downgrading from Ubuntu 17.10 to 16.04.
+    I MIGHT be able to get 17.10 working... I should do it in a VM first!
+        And document it!
+
 Take modal_insert() and make a modal_update(data).
 
 Fix UPDATE to work.

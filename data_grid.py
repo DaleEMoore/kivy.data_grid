@@ -3,7 +3,7 @@ import urllib2
 import json
 import pprint
 import functools
-kivy.require('1.7.1')
+#kivy.require('1.7.1')
 
 from kivy.app import App
 from kivy.lang import Builder
