@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import kivy
 import requests
 #import urllib2
