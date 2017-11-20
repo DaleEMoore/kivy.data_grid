@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+# #!/usr/bin/env python2
 # From http://missmaximas-programmer.blogspot.com/2015/05/python-with-ui-kivy-basics.html
 import kivy
 from kivy.app import App

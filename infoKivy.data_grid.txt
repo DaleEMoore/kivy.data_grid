@@ -48,6 +48,25 @@ ronment variable\nNo package 'SDL2_mixer' found\n"
     https://kivy.org/docs/installation/installation-linux.html#using-software-packages
     Nope... nothing works:(
 
+
+    x-gnu.so: undefined symbol: PyFPE_jbuf
+    https://github.com/kivy/kivy/issues/5453
+    https://groups.google.com/forum/#!topic/kivy-users/lRLfxp1Sywg
+    Okay, relief. Yes, the binary installer for Kivy seems broken on 17.10.
+    Luckily, you can get it working if you build from source.
+    So, follow the instruction here for 16.04:
+        https://kivy.org/docs/installation/installation.html#installation-devel
+    But leave out
+        python-gst0.10
+        gstreamer0.10-plugins-good
+    from the dependencies.
+    This might have helped:
+    sudo apt-get install python3-setuptools python-pygame python3-opengl   python3-enchant python3-dev build-essential python3-pip libgl1-mesa-dev   libgles2-mesa-dev zlib1g-dev
+
+
+
+
+
 I couldn't get kivy running on PC JenOvo.
     It looked like cython, kivy versions.
     I've got it working by downgrading from Ubuntu 17.10 to 16.04.
