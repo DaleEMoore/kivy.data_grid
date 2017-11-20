@@ -1,5 +1,6 @@
 import kivy
-import urllib2
+import requests
+#import urllib2
 import json
 import pprint
 import functools
