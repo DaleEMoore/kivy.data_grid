@@ -63,6 +63,10 @@ ronment variable\nNo package 'SDL2_mixer' found\n"
     This might have helped:
     sudo apt-get install python3-setuptools python-pygame python3-opengl   python3-enchant python3-dev build-essential python3-pip libgl1-mesa-dev   libgles2-mesa-dev zlib1g-dev
 
+    Went back to Ubuntu 16.04!
+    It's no better. Still fails on the GUI.
+    Damn it!
+
 
 
 
