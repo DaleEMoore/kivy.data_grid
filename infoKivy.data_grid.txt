@@ -5,6 +5,85 @@ to      https://github.com/DaleEMoore/kivy.data_grid
 
 
 TODO
+Get firstKivy.py running on Ubuntu 17.10.
+    [CRITICAL          ] [Window      ] Unable to find any valuable Window provider at all!
+    https://github.com/kivy/kivy/issues/3002
+    https://kivy.org/docs/installation/installation-linux.html
+    sudo add-apt-repository ppa:kivy-team/kivy
+    apt update
+    apt install python3-kivy
+    maybe https://github.com/kivy/kivy/issues/5453
+    pip3 install Cython==0.23
+    pip3 install kivy==1.9.1
+    pkg-config: not found
+    apt install pkg-config
+    Package gstreamer-1.0 was not found in the pkg-config search path.\nPerhaps you should add the directory containing `gstreamer-1.0.pc'\nto the PKG_
+CONFIG_PATH environment variable\nNo package 'gstreamer-1.0' found\
+    sudo apt-get install libgstreamer1.0-dev
+      b"Package sdl2 was not found in the pkg-config search path.\nPerhaps you should add the directory containing `sdl2.pc'\nto the PKG_CONFIG_PATH enviro
+nment variable\nNo package 'sdl2' found\nPackage SDL2_ttf was not found in the pkg-config search path.\nPerhaps you should add the directory containing
+ `SDL2_ttf.pc'\nto the PKG_CONFIG_PATH environment variable\nNo package 'SDL2_ttf' found\nPackage SDL2_image was not found in the pkg-config search pat
+h.\nPerhaps you should add the directory containing `SDL2_image.pc'\nto the PKG_CONFIG_PATH environment variable\nNo package 'SDL2_image' found\nPackag
+e SDL2_mixer was not found in the pkg-config search path.\nPerhaps you should add the directory containing `SDL2_mixer.pc'\nto the PKG_CONFIG_PATH envi
+ronment variable\nNo package 'SDL2_mixer' found\n"
+    https://kivy.org/docs/gettingstarted/installation.html
+    https://kivy.org/docs/installation/installation.html#installation-devel
+    root@JenOvo:/home/dalem# sudo apt-get install python-setuptools python-pygame python-opengl \
+    >   python-gst0.10 python-enchant gstreamer0.10-plugins-good python-dev \
+    >   build-essential python-pip libgl1-mesa-dev libgles2-mesa-dev zlib1g-dev
+    Reading package lists... Done
+    Building dependency tree
+    Reading state information... Done
+    Package python-gst0.10 is not available, but is referred to by another package.
+    This may mean that the package is missing, has been obsoleted, or
+    is only available from another source
+
+    Package gstreamer0.10-plugins-good is not available, but is referred to by another package.
+    This may mean that the package is missing, has been obsoleted, or
+    is only available from another source
+
+    E: Package 'python-gst0.10' has no installation candidate
+    E: Package 'gstreamer0.10-plugins-good' has no installation candidate
+
+    https://kivy.org/docs/installation/installation-linux.html#using-software-packages
+    Nope... nothing works:(
+
+
+    x-gnu.so: undefined symbol: PyFPE_jbuf
+    https://github.com/kivy/kivy/issues/5453
+    https://groups.google.com/forum/#!topic/kivy-users/lRLfxp1Sywg
+    Okay, relief. Yes, the binary installer for Kivy seems broken on 17.10.
+    Luckily, you can get it working if you build from source.
+    So, follow the instruction here for 16.04:
+        https://kivy.org/docs/installation/installation.html#installation-devel
+    But leave out
+        python-gst0.10
+        gstreamer0.10-plugins-good
+    from the dependencies.
+    This might have helped:
+    sudo apt-get install python3-setuptools python-pygame python3-opengl   python3-enchant python3-dev build-essential python3-pip libgl1-mesa-dev   libgles2-mesa-dev zlib1g-dev
+
+    Went back to Ubuntu 16.04!
+    It's no better. Still fails on the GUI.
+    Damn it!
+
+    Try the documented installation.
+    Try the nightly builds.
+    firstKivy.py works inside PyCharm, but the commad line still fails.
+    Tough... just use PyCharm and shutup!
+
+
+
+
+
+
+I couldn't get kivy running on PC JenOvo.
+    It looked like cython, kivy versions.
+    I've got it working by downgrading from Ubuntu 17.10 to 16.04.
+    I MIGHT be able to get 17.10 working... I should do it in a VM first!
+        And document it!
+    Got the VM running at JenOvo and QnD. Now keep.google.com document it.
+
 Take modal_insert() and make a modal_update(data).
 
 Fix UPDATE to work.

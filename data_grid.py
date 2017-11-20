@@ -1,9 +1,10 @@
 import kivy
-import urllib2
+import requests
+#import urllib2
 import json
 import pprint
 import functools
-kivy.require('1.7.1')
+#kivy.require('1.7.1')
 
 from kivy.app import App
 from kivy.lang import Builder
@@ -329,6 +330,7 @@ def modal_update(self):
 				input_list.append(text_inputs.text)
 		print (input_list)
 		# TODO; how do I make this an UPDATE?
+		print (input_list)
 		grid.add_row(input_list, body_alignment, col_size, self)
 
 	# print view

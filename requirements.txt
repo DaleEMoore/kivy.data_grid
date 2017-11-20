@@ -1,0 +1,4 @@
+cython
+kivy    # install nightly dev; apt install python3-kivy
+requests
+#urllib2
