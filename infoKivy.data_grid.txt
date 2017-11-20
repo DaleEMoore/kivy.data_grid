@@ -69,7 +69,7 @@ ronment variable\nNo package 'SDL2_mixer' found\n"
 
     Try the documented installation.
     Try the nightly builds.
-    It works inside PyCharm, but the commad line still fails.
+    firstKivy.py works inside PyCharm, but the commad line still fails.
     Tough... just use PyCharm and shutup!
 
 
