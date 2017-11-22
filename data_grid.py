@@ -135,12 +135,21 @@ class DataGrid(GridLayout):
         childs = self.parent.children   # DataGrid.children
         selected = 0
         for ch in childs:               # DataGrid.children[n] n = all children
+            print("ch: " + str(ch))
             for c in reversed(ch.children): # DataGrid.children[n].children
+                print("c: " + str(c))
                 if c.id != "Header_Label":
+                    print("c.id: " + str(c.id))
                     # HINT; google kivy datagrid state and find source that references kivy objects.
                     if c.state == "down":   # state can be ('normal', 'down', ...)
+                        print (str(c.id) + '   -   ' + str(c.state), end='')
+                        nml2 = MarkupLabel(c.text).markup
+                        print(" N_cols: " + str(n_cols), end='')
+                        print(" Id: " + str(c.id), end='')
+                        print(" Length: " + str(len(ch.children)), end='')
+                        print(" Value: " + nml2[1])
                         self.remove_widget(c)
-                        print (str(c.id) + '   -   ' + str(c.state))
+                        #print (str(c.id) + '   -   ' + str(c.state))
                         selected += 1
         if selected == 0:   # None were found to be state='down' so delete something - the bottom row.
                             # But, interestingly, the bottom row on the screen is the first row in memory.
@@ -170,6 +179,77 @@ class DataGrid(GridLayout):
                     else:
                         break
         print("Done removing items.")
+
+    def update_row(self, row_data, row_align, cols_size, instance, **kwargs):
+        #def add_row(self, row_data, row_align, cols_size, instance, **kwargs):
+        #def update_row(self, n_cols, instance, **kwargs):
+
+        print("update_row()")
+        doUpdate = True
+        theData = {}
+        childs = self.parent.children   # DataGrid.children
+        selected = 0
+        for ch in childs:               # DataGrid.children[n] n = all children
+            print("ch: " + str(ch))
+            for c in reversed(ch.children): # DataGrid.children[n].children
+                print("c: " + str(c))
+                if c.id != "Header_Label":
+                    print("c.id: " + str(c.id))
+                    # HINT; google kivy datagrid state and find source that references kivy objects.
+                    if c.state == "down":   # state can be ('normal', 'down', ...)
+                        print (str(c.id) + '   -   ' + str(c.state), end='')
+                        nml2 = MarkupLabel(c.text).markup
+                        print("A cell or column item on the selected row.", end='')
+                        print(" N_cols: " + str(n_cols), end='')
+                        print(" Id: " + str(c.id), end='')
+                        print(" Length: " + str(len(ch.children)), end='')
+                        print(" Value: " + nml2[1])
+                        #self.remove_widget(c)
+                        #print (str(c.id) + '   -   ' + str(c.state))
+                        theData[selected] = nml2[1]  # Keep this data for update.
+                        print("theData: " + str(theData))
+                        selected += 1
+        if selected == 0:   # None were found to be state='down' so delete something - the bottom row.
+                            # But, interestingly, the bottom row on the screen is the first row in memory.
+                            # Except that items that have .id == 'Header_Label' are the first row(s) in memory.
+            for ch in childs:
+                count_01 = n_cols
+                count_02 = 0
+                selected = 0
+                while (selected < n_cols): # Number of columns in a row; must delete all columns in the row.
+                    if n_cols != len(ch.children):
+                        for c in ch.children:
+                            if c.id != "Header_Label":
+                                print("A cell or column item on the selected row.", end='')
+                                #print("Data: " + str(c.text))
+                                nml2 = MarkupLabel(c.text).markup
+                                #print("~m: {}".format(nml2))
+                                print("N_cols: " + str(n_cols), end='')
+                                print(" Count: " + str(selected), end='')
+                                print(" Id: " + str(c.id), end='')
+                                print (" Length: " + str(len(ch.children)), end='')
+                                print(" Value: " + nml2[1])
+
+                                theData[selected] = nml2[1]  # Keep this data for update.
+                                print("theData: " + theData)
+                                #self.remove_widget(c) # there goes one of the columns in the row.
+                                selected += 1
+                                break
+                            else:
+                                break
+                    else:
+                        break
+        if not doUpdate:
+            # TODO; Display the error message in kivy so folks can see it.
+            print("Can not doUpdate because of some previous error.")
+            exit()
+
+        print("doUpdate")
+        print("Data: " + str(theData))
+        print("If the number of columns from selected, or default is correct then do the ENTRY and UPDATE here.")
+        print("TODO; ENTRY then UPDATE goes here.")
+
+        print("Done updating items.")
 
     def select_all(self, instance, **kwargs):
         print("select_all()")
@@ -258,6 +338,8 @@ def modal_insert(self):
                 input_list.append(text_inputs.text)
         print (input_list)
         grid.add_row(input_list, body_alignment, col_size, self)
+        # def add_row(self, row_data, row_align, cols_size, instance, **kwargs):
+
         # print view
         # view.dismiss
 
@@ -276,27 +358,27 @@ def modal_insert(self):
     view.open()
 
 
-def modal_update(self):
-    print("modal_update()")
+def modal_update_old(self):
+    print("modal_update_old()")
     #def modal_update(columnHeadings, rows):
 
-    # TODO; how do I get this data from kivy; inside this function?
-    # TODO; where are the columnHeading fields in kivy data?
+    # How do I get this data from kivy; inside this function? drill down to the .text
+    # Where are the columnHeading fields in kivy data? in cells with .id == "Header_Label".
     # grid object is present here.
     # - - - - - - - - - -
     print ("From DataGrid.remove_row(self, n_cols({}), instance, **kwargs)".format(n_cols))
     childs = grid.children
     print(str(childs))
     #childs = self.parent.children
-    selected = 0
+    selected = 0    # No cells selected, yet.
     doUpdate = True
     theData = {}
     for ch in childs:
-        print(str(ch))
+        print("ch: " + str(ch))
         for c in reversed(ch.children):
-            print(str(c))
+            print("c: " + str(c))
             if c.id != "Header_Label":
-                print(str(c.id))
+                print("c.id: " + str(c.id))
                 if c.state == "down":
                     #print(str(c.state))
                     #print("self.remove_widget(c) was here.")
@@ -306,7 +388,7 @@ def modal_update(self):
                     print(str(c.id) + '   -   ' + str(c.state) + ' - ' + nml2[1])
                     theData[selected] = nml2[1] # Keep this data for update.
                     print("theData: " + theData)
-                    selected += 1
+                    selected += 1   # Another cell selected.
     if selected > 4:
         print("Only a single row may be selected for update.")
         doUpdate = False
@@ -342,9 +424,13 @@ def modal_update(self):
         #                    break
         #        else:
         #            break
-    if doUpdate:
-        print("doUpdate")
-        print("Data: " + theData)
+    if not doUpdate:
+        # TODO; Display the error message in kivy so folks can see it.
+        print("Can not doUpdate because of some previous error.")
+        exit()
+
+    print("doUpdate")
+    print("Data: " + theData)
     # - - - - - - - - - -
     columnHeadings = ['ID', 'Nome', 'Preco', 'IVA']
     # TODO; where are the product fields inside kivy data?
@@ -418,7 +504,10 @@ def modal_update(self):
         print (input_list)
         # TODO; how do I make this an UPDATE?
         print (input_list)
-        grid.add_row(input_list, body_alignment, col_size, self)
+        grid.update_row(input_list, body_alignment, col_size, self)
+        # def update_row(self, n_cols, instance, **kwargs):
+        #grid.add_row(input_list, body_alignment, col_size, self)
+        # def add_row(self, row_data, row_align, cols_size, instance, **kwargs):
 
     # print view
     # view.dismiss
@@ -439,12 +528,19 @@ def modal_update(self):
 
 
 pp = partial(grid.add_row, ['001', 'Teste', '4.00', '4.00'], body_alignment, col_size)
+# def add_row(self, row_data, row_align, cols_size, instance, **kwargs):
 add_row_btn = Button(text="Add Row", on_press=pp)
 del_row_btn = Button(text="Delete Row", on_press=partial(grid.remove_row, len(header)))
 
 # TODO; need to lookup the selected row and give an error if not selected and pass data if selected to update.
 # TODO; how do I do this without self?
-upt_row_btn = Button(text="Update Row", on_press=modal_update)
+
+ppUpdate = partial(grid.update_row, ['001', 'Teste', '4.00', '4.00'], body_alignment, col_size)
+
+
+upt_row_btn = Button(text="Update Row", on_press=ppUpdate)
+# def update_row(self, n_cols, instance, **kwargs):
+#upt_row_btn = Button(text="Update Row", on_press=modal_update)
 #ppUdate = partial(modal_update(columnHeadings, rows))
 #ppUdate = partial(modal_update(columnHeadings, rows))
 #upt_row_btn = Button(text="Update Row", on_press=ppUdate)
@@ -463,6 +559,7 @@ def json_fill(self):
     for d in data:
         print (d)
         grid.add_row(d, body_alignment, col_size, self)
+        # def add_row(self, row_data, row_align, cols_size, instance, **kwargs):
 
 json_fill_btn = Button(text="JSON fill", on_press=partial(json_fill))
 
