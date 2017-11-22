@@ -231,7 +231,7 @@ class DataGrid(GridLayout):
                                 print(" Value: " + nml2[1])
 
                                 theData[selected] = nml2[1]  # Keep this data for update.
-                                print("theData: " + theData)
+                                print("theData: " + str(theData))
                                 #self.remove_widget(c) # there goes one of the columns in the row.
                                 selected += 1
                                 break
@@ -243,12 +243,14 @@ class DataGrid(GridLayout):
             # TODO; Display the error message in kivy so folks can see it.
             print("Can not doUpdate because of some previous error.")
             exit()
+        print("If the data is OK then do the ENTRY and UPDATE here.")
 
         print("doUpdate")
         print("Data: " + str(theData))
-        print("If the number of columns from selected, or default is correct then do the ENTRY and UPDATE here.")
-        print("TODO; ENTRY then UPDATE goes here.")
-
+        print("TODO; ENTRY screen")
+        print("TODO; rob entry screen from add_row?")
+        print("TODO; UPDATE DataGrid")
+        print("TODO; UPDATE database")
         print("Done updating items.")
 
     def select_all(self, instance, **kwargs):
