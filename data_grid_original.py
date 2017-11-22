@@ -2,9 +2,12 @@
 # Restored from:
 # https://raw.githubusercontent.com/DaleEMoore/kivy.data_grid/306346b56a959467382bf617bca9bdc689d65745/data_grid.py
 # Because Dale had messed it up.
+# Stopped using urllib2 and started using requests instead.
+# Changed all print to be print().
 
 import kivy
-import urllib2
+import requests # Perhaps this will work in python2 instead of the no longer available urllib2.
+# import urllib2 # No longer available.
 import json
 import pprint
 import functools
@@ -80,8 +83,8 @@ class DataGrid(GridLayout):
             childs = self.parent.children
             for ch in childs:
                 if ch.id == self.id:
-                    print ch.id
-                    print len(ch.id)
+                    print (ch.id)
+                    print (len(ch.id))
                     row_n = 0
                     if len(ch.id) == 11:
                         row_n = ch.id[4:5]
@@ -146,7 +149,7 @@ class DataGrid(GridLayout):
                 if c.id != "Header_Label":
                     if c.state == "down":
                         self.remove_widget(c)
-                        print str(c.id) + '   -   ' + str(c.state)
+                        print (str(c.id) + '   -   ' + str(c.state))
                         selected += 1
         if selected == 0:
             for ch in childs:
@@ -157,8 +160,8 @@ class DataGrid(GridLayout):
                     if n_cols != len(ch.children):
                         for c in ch.children:
                             if c.id != "Header_Label":
-                                print "Length: " + str(len(ch.children))
-                                print "N_cols: " + str(n_cols + 1)
+                                print ("Length: " + str(len(ch.children)))
+                                print ("N_cols: " + str(n_cols + 1))
 
                                 self.remove_widget(c)
                                 count += 1
@@ -187,7 +190,7 @@ class DataGrid(GridLayout):
         for ch in childs:
             for c in ch.children:
                 if c.id != "Header_Label":
-                    print str(c.id) + '   -   ' + str(c.state) + '   -   ' + str(c.text)
+                    print (str(c.id) + '   -   ' + str(c.state) + '   -   ' + str(c.text))
 
     def __init__(self, header_data, body_data, b_align, cols_size, **kwargs):
         super(DataGrid, self).__init__(**kwargs)
@@ -258,7 +261,7 @@ def modal_insert(self):
         for text_inputs in reversed(self.parent.children[2].children):
             if text_inputs.id == "txtinp":
                 input_list.append(text_inputs.text)
-        print input_list
+        print (input_list)
         grid.add_row(input_list, body_alignment, col_size, self)
 
     # print view
@@ -285,7 +288,7 @@ add_custom_row = Button(text="Add Custom Row", on_press=modal_insert)
 ###
 def json_fill(self):
     for d in data:
-        print d
+        print (d)
         grid.add_row(d, body_alignment, col_size, self)
 
 
