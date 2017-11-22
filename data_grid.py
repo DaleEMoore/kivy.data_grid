@@ -64,6 +64,7 @@ products_list = []
 counter = 0
 class DataGrid(GridLayout):
     def add_row(self, row_data, row_align, cols_size, instance, **kwargs):
+        print("add_row()")
         global counter
         self.rows += 1
         #self.rows = 2
@@ -128,6 +129,7 @@ class DataGrid(GridLayout):
         counter += 1
         #self.rows += 1
     def remove_row(self, n_cols, instance, **kwargs):
+        print("remove_row()")
         childs = self.parent.children
         selected = 0
         for ch in childs:
@@ -146,6 +148,16 @@ class DataGrid(GridLayout):
                     if n_cols != len(ch.children):
                         for c in ch.children:
                             if c.id != "Header_Label":
+                                # print the data that is this cell.
+                                print("Data: " + str(c.text))
+                                # TODO; cleanup c.text; it contains Text Markup [b]bolded[/b]
+                                # ['015', 'Macarronada', '4.00', '0.23']
+                                # [color=000000]015[/color]
+                                # [color=000000]Macarronada[/color]
+                                # [color=000000]4.00[/color]
+                                # [color=000000]0.23[/color]
+                                print("Count: " + str(count))
+                                print("Id: " + str(c.id))
                                 print ("Length: " + str(len(ch.children)))
                                 print ("N_cols: " + str(n_cols + 1))
 
@@ -156,8 +168,10 @@ class DataGrid(GridLayout):
                                 break
                     else:
                         break
+        print("Done removing items.")
 
     def select_all(self, instance, **kwargs):
+        print("select_all()")
         childs = self.parent.children
         for ch in childs:
             for c in ch.children:
@@ -165,6 +179,7 @@ class DataGrid(GridLayout):
                     c.state = "down"
 
     def unselect_all(self, instance, **kwargs):
+        print("unselect_all()")
         childs = self.parent.children
         for ch in childs:
             for c in ch.children:
@@ -172,6 +187,7 @@ class DataGrid(GridLayout):
                     c.state = "normal"
 
     def show_log(self, instance, **kwargs):
+        print("show_log()")
         childs = self.parent.children
         for ch in childs:
             for c in ch.children:
@@ -179,6 +195,7 @@ class DataGrid(GridLayout):
                     print (str(c.id) + '   -   ' + str(c.state) +  '   -   ' + str(c.text))
 
     def __init__(self, header_data, body_data, b_align, cols_size, **kwargs):
+        print("__init__()")
         super(DataGrid, self).__init__(**kwargs)
         self.size_hint_y=None
         self.bind(minimum_height=self.setter('height'))
@@ -207,6 +224,7 @@ scroll.do_scroll_x = False
 
 ###
 def modal_insert(self):
+    print("modal_insert()")
     lbl1 = Label(text='ID', id="lbl")
     lbl2 = Label(text='Nome', id="lbl")
     lbl3 = Label(text='Preco', id="lbl")
@@ -258,6 +276,7 @@ def modal_insert(self):
 
 
 def modal_update(self):
+    print("modal_update()")
     #def modal_update(columnHeadings, rows):
 
     # TODO; how do I get this data from kivy; inside this function?
@@ -411,6 +430,7 @@ add_custom_row = Button(text="Add Custom Row", on_press=modal_insert)
 
 ###
 def json_fill(self):
+    print("json_fill()")
     for d in data:
         print (d)
         grid.add_row(d, body_alignment, col_size, self)
